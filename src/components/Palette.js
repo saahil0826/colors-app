@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ColorBox from "./ColorBox.js";
 import Navbar from "./Navbar.js";
-import "../Palette.css";
+import "../css/Palette.css";
 
 class Palette extends Component {
   constructor(props) {
