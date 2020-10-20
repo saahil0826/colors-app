@@ -16,7 +16,7 @@ class ColorBox extends Component {
     });
   }
   render() {
-    const { name, background, moreUrl } = this.props;
+    const { name, background, moreUrl, showingFullPalette } = this.props;
     const { copied } = this.state;
     const isDarkColor = chroma(background).luminance() <= 0.08;
     const isLightColor = chroma(background).luminance() >= 0.7;
@@ -39,11 +39,13 @@ class ColorBox extends Component {
               Copy
             </button>
           </div>
+          {showingFullPalette && (
           <Link to={moreUrl} onClick={e => e.stopPropagation()}>
             <span className={`see-more ${isLightColor && "dark-text"}`}>
               MORE
             </span>
           </Link>
+        )}
         </div>
       </CopyToClipboard>
     );
