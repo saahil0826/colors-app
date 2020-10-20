@@ -11,6 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Button from "@material-ui/core/Button";
+import DraggableColorBox from "./DraggableColorBox";
 import { ChromePicker } from "react-color";
 
 const drawerWidth = 400;
@@ -56,6 +57,7 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
+    height: "calc(100vh - 64px)",
     padding: theme.spacing.unit * 3,
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
@@ -77,7 +79,7 @@ class NewPaletteForm extends Component {
     super(props);
     this.state = {
       open: true,
-      currentColor: "blue",
+      currentColor: "teal",
       colors: ["purple", "#e15764"]
     };
     this.updateCurrentColor = this.updateCurrentColor.bind(this);
@@ -108,29 +110,29 @@ class NewPaletteForm extends Component {
       <div className={classes.root}>
         <CssBaseline />
         <AppBar
-          position="fixed"
+          position='fixed'
           className={classNames(classes.appBar, {
             [classes.appBarShift]: open
           })}
         >
           <Toolbar disableGutters={!open}>
             <IconButton
-              color="inherit"
-              aria-label="Open drawer"
+              color='inherit'
+              aria-label='Open drawer'
               onClick={this.handleDrawerOpen}
               className={classNames(classes.menuButton, open && classes.hide)}
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" color="inherit" noWrap>
+            <Typography variant='h6' color='inherit' noWrap>
               Persistent drawer
             </Typography>
           </Toolbar>
         </AppBar>
         <Drawer
           className={classes.drawer}
-          variant="persistent"
-          anchor="left"
+          variant='persistent'
+          anchor='left'
           open={open}
           classes={{
             paper: classes.drawerPaper
@@ -142,12 +144,12 @@ class NewPaletteForm extends Component {
             </IconButton>
           </div>
           <Divider />
-          <Typography variant="h4">Design Your Palette</Typography>
+          <Typography variant='h4'>Design Your Palette</Typography>
           <div>
-            <Button variant="contained" color="secondary">
+            <Button variant='contained' color='secondary'>
               Clear Palette
             </Button>
-            <Button variant="contained" color="primary">
+            <Button variant='contained' color='primary'>
               Random Color
             </Button>
           </div>
@@ -156,8 +158,8 @@ class NewPaletteForm extends Component {
             onChangeComplete={this.updateCurrentColor}
           />
           <Button
-            variant="contained"
-            color="primary"
+            variant='contained'
+            color='primary'
             style={{ backgroundColor: this.state.currentColor }}
             onClick={this.addNewColor}
           >
@@ -170,11 +172,9 @@ class NewPaletteForm extends Component {
           })}
         >
           <div className={classes.drawerHeader} />
-          <ul>
-            {this.state.colors.map(color => (
-              <li style={{ backgroundColor: color }}>{color}</li>
-            ))}
-          </ul>
+          {this.state.colors.map(color => (
+            <DraggableColorBox color={color} />
+          ))}
         </main>
       </div>
     );
