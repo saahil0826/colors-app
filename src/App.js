@@ -27,32 +27,18 @@ class App extends Component {
       <Switch>
         <Route
           exact
-          path="/palette/new"
+          path='/palette/new'
           render={routeProps => (
-            <NewPaletteForm savePalette={this.savePalette} {...routeProps} />
-          )}
-        />
-        <Route
-          exact
-          path="/"
-          render={routeProps => (
-            <PaletteList palettes={this.state.palettes} {...routeProps} />
-          )}
-        />
-        <Route
-          exact
-          path="/palette/:id"
-          render={routeProps => (
-            <Palette
-              palette={generatePalette(
-                this.findPalette(routeProps.match.params.id)
-              )}
+            <NewPaletteForm
+              savePalette={this.savePalette}
+              palettes={this.state.palettes}
+              {...routeProps}
             />
           )}
         />
         <Route
           exact
-          path="/palette/:paletteId/:colorId"
+          path='/palette/:paletteId/:colorId'
           render={routeProps => (
             <SingleColorPalette
               colorId={routeProps.match.params.colorId}
@@ -62,11 +48,25 @@ class App extends Component {
             />
           )}
         />
+        <Route
+          exact
+          path='/'
+          render={routeProps => (
+            <PaletteList palettes={this.state.palettes} {...routeProps} />
+          )}
+        />
+        <Route
+          exact
+          path='/palette/:id'
+          render={routeProps => (
+            <Palette
+              palette={generatePalette(
+                this.findPalette(routeProps.match.params.id)
+              )}
+            />
+          )}
+        />
       </Switch>
-
-      // <div>
-      //   <Palette palette={generatePalette(seedColors[4])} />
-      // </div>
     );
   }
 }
